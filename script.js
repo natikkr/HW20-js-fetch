@@ -16,43 +16,69 @@ async function getResponse(){
              
         console.log(response)
     }
-
-function Users (users) {
-    for (let i = 0; i < users.length; i++) {
-        let user = document.createElement("div");
-        user.id = 'user-' + users[i].id;
-        user.className = 'user';
-        span = document.createElement('span');
-        span.innerHTML = users[i].name;
-        albums = document.createElement('ul');
-        albums.className = 'albums';
-        user.appendChild(span);
-        user.appendChild(albums);
-        user.addEventListener("click", function(){
-            let that = this;
-            let userId = this.id.split('-')[1];
-            let alb = this.getElementsByClassName('albums')[0];
-            alb.innerHTML = '';
-        })
-    }
-
-document.getElementById('users').appendChild(user);
-
 }
-function Albums (albums) {
-    for (let j = 0; j < albums.length; j++) {
-        if (albums[j].userId == userId) {
-            console.log(albums[j].userId, ' == ', userId);
-            let li = document.createElement('li');
-            li.innerHTML = albums[j].title;
-            alb.appendChild(li);
-            }
-        } 
+async function fetchJSONAsync(url, init) {
+    let response = await fetch(url, init);
+    if (response.ok) {
+        let json = await response.json();
+        return json;
     }
-} 
+    else
+        throw new Error(`${response.status}: ${response.statusText}`);
+}
+    (async function main() {
+        try {
+            let url = "https://jsonplaceholder.typicode.com/albums";
+            let albums = await fetchJSONAsync(url);
+            for (let e of albums) {
+                document.querySelector('block-right').insertAdjacentHTML("beforeend", `<div>
+UserId : ${e.userId}<br>
+Id : ${e.id}<br>
+url : ${e.url}<br>
+Title : ${e.title}</div>`);
+            }
+        } catch (error) {
+            console.log("Ошибка");
+        }
+    })();
+    getResponse();
+
+// function Users (users) {
+//     for (let i = 0; i < users.length; i++) {
+//         let user = document.createElement("div");
+//         user.id = 'user-' + users[i].id;
+//         user.className = 'user';
+//         span = document.createElement('span');
+//         span.innerHTML = users[i].name;
+//         albums = document.createElement('ul');
+//         albums.className = 'albums';
+//         user.appendChild(span);
+//         user.appendChild(albums);
+//         user.addEventListener("click", function(){
+//             let that = this;
+//             let userId = this.id.split('-')[1];
+//             let alb = this.getElementsByClassName('albums')[0];
+//             alb.innerHTML = '';
+//         })
+//     }
+
+// document.getElementById('users').appendChild(user);
+
+// }
+// function Albums (albums) {
+//     for (let j = 0; j < albums.length; j++) {
+//         if (albums[j].userId == userId) {
+//             console.log(albums[j].userId, ' == ', userId);
+//             let li = document.createElement('li');
+//             li.innerHTML = albums[j].title;
+//             alb.appendChild(li);
+//             }
+//         } 
+//     }
+// } 
 
 
-getResponse()
+// getResponse()
 
 
 
