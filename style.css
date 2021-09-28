@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html,body {
+    height: 100px;
+}
+
+.main{
+    display: flex;
+    padding: 5px;
+}
+.photos {
+    width: 100%;
+    text-align: center;
+}
+.albums {
+    flex-shrink: 0;
+}
+.albums_title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+}
+.albums_list {
+    padding: 15px;
+    cursor: pointer;
+}
+.albums_list-item {
+    padding: 15px;
+    font-size: 24px;
+    margin-left: 20px;
+    list-style-type: none;
+}
+.titlePhoto {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+}
+.photos_img {
+    margin: 5px;
+    margin-top: 0px;
+}
